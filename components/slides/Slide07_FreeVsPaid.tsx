@@ -37,7 +37,7 @@ export function Slide07_FreeVsPaid() {
   return (
     <SlideShell className="relative">
       <div className="flex flex-col items-center justify-center h-full w-full max-w-6xl mx-auto px-4 relative z-10">
-        <SlideHeading size="lg" className="mb-8 text-center">
+        <SlideHeading size="large" className="mb-8 text-center">
           Frontier <span className="text-blue-500">Models</span>
         </SlideHeading>
 
