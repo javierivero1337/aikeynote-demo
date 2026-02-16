@@ -13,7 +13,7 @@ const highlightVariants = {
   visible: (i: number) => ({
     color: "#60a5fa",
     backgroundSize: "100% 100%",
-    transition: { delay: 2.2 + i * 0.3, duration: 0.8, ease: "easeOut" },
+    transition: { delay: 2.2 + i * 0.3, duration: 0.8, ease: "easeOut" as const },
   }),
 };
 
