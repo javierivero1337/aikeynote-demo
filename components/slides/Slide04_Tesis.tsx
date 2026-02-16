@@ -3,6 +3,7 @@ import { SlideShell } from "../deck/SlideShell";
 import { SlideHeading } from "../deck/SlideHeading";
 import { motion } from "framer-motion";
 import { AwakeningDots } from "../deck/Backgrounds";
+import ShinyText from "../ShinyText";
 
 export function Slide04_Tesis() {
   return (
@@ -14,15 +15,24 @@ export function Slide04_Tesis() {
           <span className="text-white/30 line-through decoration-red-500/50">exageración</span>"
         </SlideHeading>
         
-        <motion.p
+        <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 1, duration: 0.8 }}
           className="text-3xl md:text-4xl font-light text-zinc-200"
         >
           Estamos viviendo el inicio de algo <br />
-          <span className="font-semibold text-blue-400">mucho más grande</span> que el Covid.
-        </motion.p>
+          <div className="inline-block mt-2">
+            <ShinyText 
+              text="mucho más grande" 
+              disabled={false} 
+              speed={3} 
+              className="font-semibold text-blue-400" 
+              color="#60a5fa"
+              shineColor="#ffffff"
+            />
+          </div> que el Covid.
+        </motion.div>
       </div>
     </SlideShell>
   );

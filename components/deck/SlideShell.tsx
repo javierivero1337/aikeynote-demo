@@ -1,12 +1,13 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 
-interface SlideShellProps {
+interface SlideShellProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   className?: string;
+  contentClassName?: string;
 }
 
-export function SlideShell({ children, className }: SlideShellProps) {
+export function SlideShell({ children, className, contentClassName, ...props }: SlideShellProps) {
   return (
     <div
       className={cn(
@@ -14,8 +15,9 @@ export function SlideShell({ children, className }: SlideShellProps) {
         "bg-gradient-to-br from-zinc-950 to-black",
         className
       )}
+      {...props}
     >
-      <div className="w-full max-w-6xl mx-auto flex flex-col gap-8">
+      <div className={cn("w-full max-w-6xl mx-auto flex flex-col gap-8", contentClassName)}>
         {children}
       </div>
     </div>

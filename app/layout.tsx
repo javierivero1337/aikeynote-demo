@@ -30,6 +30,11 @@ export default function RootLayout({
         className={`${monaSans.variable} ${hubotSans.variable} antialiased font-sans`}
       >
         {children}
+        <div className="fixed bottom-6 left-0 right-0 flex justify-center pointer-events-none z-50">
+          <span className="text-xs text-white/60 font-mono tracking-widest uppercase">
+            Collective Academy 2026
+          </span>
+        </div>
       </body>
     </html>
   );

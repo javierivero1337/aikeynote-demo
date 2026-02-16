@@ -152,3 +152,67 @@ export function RadarScan() {
     </div>
   );
 }
+
+export function StarField() {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {[...Array(50)].map((_, i) => (
+        <motion.div
+          key={`star-${i}`}
+          className="absolute bg-white rounded-full"
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            width: Math.random() * 2 + 1 + "px",
+            height: Math.random() * 2 + 1 + "px",
+          }}
+          animate={{
+            opacity: [0.2, 1, 0.2],
+            scale: [1, 1.5, 1],
+          }}
+          transition={{
+            duration: Math.random() * 3 + 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: Math.random() * 5,
+          }}
+        />
+      ))}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-900/10 to-transparent" />
+    </div>
+  );
+}
+
+export function Aurora() {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-50">
+      <motion.div
+        className="absolute -inset-[50%] bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20 blur-[100px]"
+        animate={{
+          transform: [
+            "translate(0%, 0%) rotate(0deg)",
+            "translate(10%, 10%) rotate(5deg)",
+            "translate(-5%, 5%) rotate(-5deg)",
+            "translate(0%, 0%) rotate(0deg)",
+          ],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      <motion.div
+        className="absolute -inset-[50%] bg-gradient-to-t from-transparent via-cyan-900/10 to-transparent blur-[80px]"
+        animate={{
+          opacity: [0.3, 0.6, 0.3],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+    </div>
+  );
+}
