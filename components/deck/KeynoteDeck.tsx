@@ -1,6 +1,8 @@
 "use client";
 
+import React from "react";
 import { DeckContainer } from "@/components/deck/DeckContainer";
+import type { DeckVariant } from "@/components/deck/types";
 import { Slide01_Hook } from "@/components/slides/Slide01_Hook";
 import { Slide02_Bio } from "@/components/slides/Slide02_Bio";
 import { Slide03_Feb2020 } from "@/components/slides/Slide03_Feb2020";
@@ -73,6 +75,10 @@ const slides = [
   Slide34_Closing,
 ];
 
-export default function Home() {
-  return <DeckContainer slides={slides} />;
+interface KeynoteDeckProps {
+  variant?: DeckVariant;
+}
+
+export function KeynoteDeck({ variant = "default" }: KeynoteDeckProps) {
+  return <DeckContainer slides={slides} variant={variant} />;
 }

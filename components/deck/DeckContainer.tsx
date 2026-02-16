@@ -4,12 +4,14 @@ import React, { useState, useEffect, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { DeckNavigation } from "./DeckNavigation";
 import { SlideProgress } from "./SlideProgress";
+import type { DeckVariant, SlideProps } from "./types";
 
 interface DeckContainerProps {
-  slides: React.ComponentType<any>[];
+  slides: React.ComponentType<SlideProps>[];
+  variant?: DeckVariant;
 }
 
-export function DeckContainer({ slides }: DeckContainerProps) {
+export function DeckContainer({ slides, variant = "default" }: DeckContainerProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const totalSlides = slides.length;
 
@@ -20,12 +22,6 @@ export function DeckContainer({ slides }: DeckContainerProps) {
   const prevSlide = useCallback(() => {
     setCurrentSlide((prev) => Math.max(prev - 1, 0));
   }, []);
-
-  const goToSlide = useCallback((index: number) => {
-    if (index >= 0 && index < totalSlides) {
-      setCurrentSlide(index);
-    }
-  }, [totalSlides]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -53,7 +49,9 @@ export function DeckContainer({ slides }: DeckContainerProps) {
           transition={{ duration: 0.5, ease: "easeInOut" }}
           className="h-full w-full"
         >
-          {CurrentSlideComponent && <CurrentSlideComponent isActive={true} />}
+          {CurrentSlideComponent && (
+            <CurrentSlideComponent isActive={true} variant={variant} />
+          )}
         </motion.div>
       </AnimatePresence>
 

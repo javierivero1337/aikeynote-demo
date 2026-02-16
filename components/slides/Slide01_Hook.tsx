@@ -5,8 +5,15 @@ import { motion } from "framer-motion";
 import Dither from "../Dither";
 import BlurText from "../BlurText";
 import Image from "next/image";
+import type { DeckVariant } from "../deck/types";
 
-export function Slide01_Hook() {
+interface Slide01HookProps {
+  variant?: DeckVariant;
+}
+
+export function Slide01_Hook({ variant = "default" }: Slide01HookProps) {
+  const showBranding = variant !== "client1";
+
   return (
     <SlideShell className="relative overflow-hidden">
       <div className="absolute inset-0 z-0">
@@ -49,14 +56,16 @@ export function Slide01_Hook() {
           transition={{ delay: 1.5, duration: 1 }}
           className="flex flex-col items-center justify-center gap-6"
         >
-          <div className="relative h-12 w-48">
-            <Image 
-              src="/collective-logo.png" 
-              alt="Collective Academy Logo" 
-              fill
-              className="object-contain object-center brightness-0 invert opacity-80"
-            />
-          </div>
+          {showBranding && (
+            <div className="relative h-12 w-48">
+              <Image
+                src="/collective-logo.png"
+                alt="Collective Academy Logo"
+                fill
+                className="object-contain object-center brightness-0 invert opacity-80"
+              />
+            </div>
+          )}
           <p className="text-sm font-mono text-zinc-500 uppercase tracking-widest">
             Javier Rivero
           </p>

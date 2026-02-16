@@ -4,8 +4,16 @@ import { SlideHeading } from "../deck/SlideHeading";
 import { motion } from "framer-motion";
 import LiquidEther from "../LiquidEther";
 import GlitchText from "../GlitchText";
+import type { DeckVariant } from "../deck/types";
+import Image from "next/image";
 
-export function Slide34_Closing() {
+interface Slide34ClosingProps {
+  variant?: DeckVariant;
+}
+
+export function Slide34_Closing({ variant = "default" }: Slide34ClosingProps) {
+  const showBranding = variant !== "client1";
+
   return (
     <SlideShell className="relative overflow-hidden">
       <div className="absolute inset-0 z-0">
@@ -38,11 +46,15 @@ export function Slide34_Closing() {
           transition={{ delay: 2.5, duration: 1 }}
           className="mt-24 flex flex-col items-center pointer-events-none"
         >
-          <img 
-            src="/collective-logo.png" 
-            alt="Collective Logo" 
-            className="h-10 w-auto opacity-60 mb-6"
-          />
+          {showBranding && (
+            <Image
+              src="/collective-logo.png"
+              alt="Collective Logo"
+              width={160}
+              height={40}
+              className="h-10 w-auto opacity-60 mb-6"
+            />
+          )}
           <p className="text-zinc-400 font-bold tracking-[0.5em] uppercase text-[12px]">
             Javier Rivero
           </p>
@@ -50,16 +62,18 @@ export function Slide34_Closing() {
       </div>
 
       {/* Mini Footer */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 3, duration: 1 }}
-        className="absolute bottom-8 left-0 right-0 z-20 flex justify-center pointer-events-none"
-      >
-        <p className="text-zinc-600 font-mono text-[10px] uppercase tracking-widest">
-          Collective Academy 2026
-        </p>
-      </motion.div>
+      {showBranding && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 3, duration: 1 }}
+          className="absolute bottom-8 left-0 right-0 z-20 flex justify-center pointer-events-none"
+        >
+          <p className="text-zinc-600 font-mono text-[10px] uppercase tracking-widest">
+            Collective Academy 2026
+          </p>
+        </motion.div>
+      )}
     </SlideShell>
   );
 }
