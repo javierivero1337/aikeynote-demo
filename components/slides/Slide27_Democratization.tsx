@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { SlideShell } from "../deck/SlideShell";
 import { motion, AnimatePresence } from "framer-motion";
-import { GridDistortion } from "../deck/Backgrounds";
+
+const ColorLoops = dynamic(() => import("../ColorLoops"), { ssr: false });
 
 const ITEMS = [
   "Dirigir una película",
@@ -19,23 +21,27 @@ export function Slide27_Democratization() {
   useEffect(() => {
     const timer = setInterval(() => {
       setIndex((prev) => (prev + 1) % ITEMS.length);
-    }, 2500); // Change every 2.5 seconds for readability
+    }, 2500);
     return () => clearInterval(timer);
   }, []);
 
   return (
     <SlideShell className="relative overflow-hidden">
-      {/* Background Image */}
+      {/* ColorLoops Background */}
       <div className="absolute inset-0 z-0">
-        <img 
-          src="/slides-imagery/slide21.png" 
-          alt="Background" 
-          className="w-full h-full object-cover opacity-70"
+        <ColorLoops
+          centerX={0.5}
+          centerY={0.5}
+          speed={0.8}
+          scale={1.2}
+          intensity={0.6}
+          symmetric={false}
+          redInfluence={0.3}
+          greenInfluence={0.2}
+          blueInfluence={0.9}
+          baseColor={0.05}
+          opacity={0.7}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
-      </div>
-      <div className="absolute inset-0 z-0 opacity-50">
-        <GridDistortion />
       </div>
 
       <div className="relative z-10 flex flex-col items-center justify-center h-full w-full text-center px-4">

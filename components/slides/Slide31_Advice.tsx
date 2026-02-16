@@ -1,24 +1,30 @@
 import React from "react";
+import dynamic from "next/dynamic";
 import { SlideShell } from "../deck/SlideShell";
 import { motion } from "framer-motion";
-import { StarField } from "../deck/Backgrounds";
+
+const GrainWave = dynamic(() => import("../GrainWave"), { ssr: false });
 
 export function Slide31_Advice() {
   return (
     <SlideShell className="relative overflow-hidden">
-      {/* Background Image */}
+      {/* GrainWave Background */}
       <div className="absolute inset-0 z-0">
-        <img 
-          src="/slides-imagery/slide25.png" 
-          alt="Background" 
-          className="w-full h-full object-cover opacity-50"
+        <GrainWave
+          startColor="#3b82f6"
+          endColor="#6366f1"
+          backgroundColor="#000000"
+          speed={0.4}
+          waveCount={30}
+          waveAmplitude={0.7}
+          waveFrequency={3}
+          lineThickness={0.15}
+          grainIntensity={40}
+          brightness={0.8}
+          speedVariation={0.005}
+          waveWidth={3.5}
+          scale={0.6}
         />
-        {/* Gradient to ensure text readability on the left */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/30" />
-      </div>
-      
-      <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
-        <StarField />
       </div>
 
       <div className="relative z-10 h-full w-full max-w-7xl mx-auto flex flex-col justify-center px-8 md:px-16">
