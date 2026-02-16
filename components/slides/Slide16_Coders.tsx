@@ -64,7 +64,7 @@ function DLine({
   className = "",
 }: {
   at: number;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
 }) {
   const [show, setShow] = useState(false);
