@@ -29,7 +29,7 @@ export function Slide33_FinancialResilience() {
       </div>
 
       <div className="relative z-10 flex flex-col items-center justify-center h-full max-w-6xl mx-auto text-center px-4">
-        <SlideHeading size="lg" className="mb-12 text-white drop-shadow-md">
+        <SlideHeading size="large" className="mb-12 text-white drop-shadow-md">
           ¿Qué puedes hacer hoy?
         </SlideHeading>
 

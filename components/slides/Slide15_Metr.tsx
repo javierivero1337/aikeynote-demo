@@ -34,7 +34,7 @@ export function Slide15_Metr() {
 
       <div className="flex flex-col items-center justify-center h-full w-full max-w-6xl mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <SlideHeading size="lg">
+          <SlideHeading size="large">
             Datos Duros: <span className="text-zinc-500">METR</span>
           </SlideHeading>
           <motion.p 

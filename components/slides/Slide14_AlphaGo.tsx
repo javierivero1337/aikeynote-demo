@@ -8,7 +8,7 @@ export function Slide14_AlphaGo() {
   return (
     <SlideShell className="relative overflow-hidden">
       <div className="flex flex-col items-center justify-center h-full w-full max-w-6xl mx-auto z-10 relative px-4">
-        <SlideHeading size="lg" className="mb-12 text-center">
+        <SlideHeading size="large" className="mb-12 text-center">
           La Lección de <span className="text-purple-500">AlphaZero</span>
         </SlideHeading>
 

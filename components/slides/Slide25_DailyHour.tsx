@@ -13,7 +13,7 @@ export function Slide25_DailyHour() {
       </div>
 
       <div className="relative z-10 flex flex-col items-center justify-center h-full max-w-6xl mx-auto text-center px-4">
-        <SlideHeading size="lg" className="mb-12 text-white drop-shadow-md">
+        <SlideHeading size="large" className="mb-12 text-white drop-shadow-md">
           La Regla de la Hora Diaria
         </SlideHeading>
 

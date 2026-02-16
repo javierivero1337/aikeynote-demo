@@ -17,7 +17,7 @@ export function Slide23_HumanTouch() {
       </div>
 
       <div className="flex flex-col items-center justify-center h-full w-full max-w-5xl mx-auto z-10 relative">
-        <SlideHeading size="lg" className="mb-16 text-center">
+        <SlideHeading size="large" className="mb-16 text-center">
           ¿El Fin del <span className="text-zinc-500">Toque Humano?</span>
         </SlideHeading>
 

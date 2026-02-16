@@ -7,7 +7,7 @@ export function Slide12_FreeVsPaid() {
   return (
     <SlideShell className="relative">
       <div className="flex flex-col items-center justify-center h-full w-full max-w-6xl mx-auto px-4">
-        <SlideHeading size="lg" className="mb-16 text-center">
+        <SlideHeading size="large" className="mb-16 text-center">
           El Espejismo <span className="text-zinc-600">Gratuito</span>
         </SlideHeading>
 

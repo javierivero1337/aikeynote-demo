@@ -41,7 +41,7 @@ export function Slide13_Loop() {
   return (
     <SlideShell className="relative overflow-hidden">
       <div className="flex flex-col items-center justify-center h-full w-full max-w-6xl mx-auto z-10">
-        <SlideHeading size="lg" className="mb-8 md:mb-16 text-center">
+        <SlideHeading size="large" className="mb-8 md:mb-16 text-center">
           El Bucle: <span className="text-blue-500">Explosión de Inteligencia</span>
         </SlideHeading>
 

@@ -137,7 +137,7 @@ export function Slide14_2_LinkbertoArchitecture() {
   return (
     <SlideShell>
       <div className="flex flex-col items-center justify-center h-full w-full max-w-6xl mx-auto z-10 relative px-6">
-        <SlideHeading size="lg" className="mb-16 text-center">
+        <SlideHeading size="large" className="mb-16 text-center">
           Internal <span className="text-blue-500">Instructions</span>
         </SlideHeading>
 

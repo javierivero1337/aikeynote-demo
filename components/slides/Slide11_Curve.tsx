@@ -50,7 +50,7 @@ export function Slide11_Curve() {
   return (
     <SlideShell className="relative overflow-hidden">
       <div className="flex flex-col items-center justify-center h-full w-full max-w-6xl mx-auto px-6">
-        <SlideHeading size="lg" className="mb-8 text-center relative z-10">
+        <SlideHeading size="large" className="mb-8 text-center relative z-10">
           La Curva <span className="text-blue-500">Exponencial</span>
         </SlideHeading>
 

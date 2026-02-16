@@ -54,7 +54,7 @@ export function Slide18_Lawyers() {
   return (
     <SlideShell className="relative overflow-hidden">
       <div className="flex flex-col items-center justify-center h-full w-full max-w-5xl mx-auto z-10 relative">
-        <SlideHeading size="lg" className="mb-14 text-center">
+        <SlideHeading size="large" className="mb-14 text-center">
           El Nuevo <span className="text-blue-500">Socio</span>
         </SlideHeading>
 
