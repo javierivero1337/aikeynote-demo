@@ -14,7 +14,7 @@ type BlurTextProps = {
   easing?: Easing | Easing[];
   onAnimationComplete?: () => void;
   stepDuration?: number;
-  as?: keyof JSX.IntrinsicElements;
+  as?: React.ElementType;
 };
 
 const buildKeyframes = (
