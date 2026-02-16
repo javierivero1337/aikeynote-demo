@@ -1,7 +1,7 @@
 import { motion, Transition, Easing } from 'motion/react';
-import { useEffect, useRef, useState, useMemo } from 'react';
+import { useEffect, useRef, useState, useMemo, ElementType, ComponentPropsWithoutRef } from 'react';
 
-type BlurTextProps = {
+type BlurTextProps<T extends ElementType = 'p'> = {
   text?: string;
   delay?: number;
   className?: string;
@@ -14,8 +14,8 @@ type BlurTextProps = {
   easing?: Easing | Easing[];
   onAnimationComplete?: () => void;
   stepDuration?: number;
-  as?: React.ElementType;
-};
+  as?: T;
+} & Omit<ComponentPropsWithoutRef<T>, 'children'>;
 
 const buildKeyframes = (
   from: Record<string, string | number>,
@@ -30,7 +30,7 @@ const buildKeyframes = (
   return keyframes;
 };
 
-const BlurText: React.FC<BlurTextProps> = ({
+const BlurText = <T extends ElementType = 'p'>({
   text = '',
   delay = 200,
   className = '',
@@ -43,8 +43,10 @@ const BlurText: React.FC<BlurTextProps> = ({
   easing = (t: number) => t,
   onAnimationComplete,
   stepDuration = 0.35,
-  as: Component = 'p',
-}) => {
+  as,
+  ...rest
+}: BlurTextProps<T>) => {
+  const Component = as || 'p';
   const elements = animateBy === 'words' ? text.split(' ') : text.split('');
   const [inView, setInView] = useState(false);
   const ref = useRef<HTMLElement>(null);
@@ -90,7 +92,7 @@ const BlurText: React.FC<BlurTextProps> = ({
   const times = Array.from({ length: stepCount }, (_, i) => (stepCount === 1 ? 0 : i / (stepCount - 1)));
 
   return (
-    <Component ref={ref} className={`blur-text ${className} flex flex-wrap`}>
+    <Component ref={ref} className={`blur-text ${className} flex flex-wrap`} {...rest}>
       {elements.map((segment, index) => {
         const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots);
 
