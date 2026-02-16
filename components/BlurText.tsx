@@ -1,7 +1,7 @@
 import { motion, Transition, Easing } from 'motion/react';
-import { useEffect, useRef, useState, useMemo, ElementType, ComponentPropsWithoutRef } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
 
-type BlurTextProps<T extends ElementType = 'p'> = {
+type BlurTextProps = {
   text?: string;
   delay?: number;
   className?: string;
@@ -14,8 +14,8 @@ type BlurTextProps<T extends ElementType = 'p'> = {
   easing?: Easing | Easing[];
   onAnimationComplete?: () => void;
   stepDuration?: number;
-  as?: T;
-} & Omit<ComponentPropsWithoutRef<T>, 'children'>;
+  as?: keyof JSX.IntrinsicElements;
+};
 
 const buildKeyframes = (
   from: Record<string, string | number>,
@@ -30,7 +30,7 @@ const buildKeyframes = (
   return keyframes;
 };
 
-const BlurText = <T extends ElementType = 'p'>({
+const BlurText: React.FC<BlurTextProps> = ({
   text = '',
   delay = 200,
   className = '',
@@ -43,26 +43,25 @@ const BlurText = <T extends ElementType = 'p'>({
   easing = (t: number) => t,
   onAnimationComplete,
   stepDuration = 0.35,
-  as,
-  ...rest
-}: BlurTextProps<T>) => {
-  const Component = as || 'p';
+  as: Tag = 'p',
+}) => {
   const elements = animateBy === 'words' ? text.split(' ') : text.split('');
   const [inView, setInView] = useState(false);
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!ref.current) return;
+    const element = ref.current;
+    if (!element) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setInView(true);
-          observer.unobserve(ref.current as Element);
+          observer.unobserve(element);
         }
       },
       { threshold, rootMargin }
     );
-    observer.observe(ref.current);
+    observer.observe(element);
     return () => observer.disconnect();
   }, [threshold, rootMargin]);
 
@@ -92,7 +91,7 @@ const BlurText = <T extends ElementType = 'p'>({
   const times = Array.from({ length: stepCount }, (_, i) => (stepCount === 1 ? 0 : i / (stepCount - 1)));
 
   return (
-    <Component ref={ref} className={`blur-text ${className} flex flex-wrap`} {...rest}>
+    <Tag ref={ref as React.RefObject<never>} className={`blur-text ${className} flex flex-wrap`}>
       {elements.map((segment, index) => {
         const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots);
 
@@ -120,7 +119,7 @@ const BlurText = <T extends ElementType = 'p'>({
           </motion.span>
         );
       })}
-    </Component>
+    </Tag>
   );
 };
 
