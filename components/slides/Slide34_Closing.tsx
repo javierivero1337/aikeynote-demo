@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import LiquidEther from "../LiquidEther";
 import GlitchText from "../GlitchText";
 import type { DeckVariant } from "../deck/types";
+import Image from "next/image";
 
 interface Slide34ClosingProps {
   variant?: DeckVariant;
@@ -46,9 +47,11 @@ export function Slide34_Closing({ variant = "default" }: Slide34ClosingProps) {
           className="mt-24 flex flex-col items-center pointer-events-none"
         >
           {showBranding && (
-            <img
+            <Image
               src="/collective-logo.png"
               alt="Collective Logo"
+              width={160}
+              height={40}
               className="h-10 w-auto opacity-60 mb-6"
             />
           )}

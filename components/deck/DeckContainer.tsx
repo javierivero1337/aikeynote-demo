@@ -4,10 +4,10 @@ import React, { useState, useEffect, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { DeckNavigation } from "./DeckNavigation";
 import { SlideProgress } from "./SlideProgress";
-import type { DeckVariant } from "./types";
+import type { DeckVariant, SlideProps } from "./types";
 
 interface DeckContainerProps {
-  slides: React.ComponentType<any>[];
+  slides: React.ComponentType<SlideProps>[];
   variant?: DeckVariant;
 }
 
@@ -22,12 +22,6 @@ export function DeckContainer({ slides, variant = "default" }: DeckContainerProp
   const prevSlide = useCallback(() => {
     setCurrentSlide((prev) => Math.max(prev - 1, 0));
   }, []);
-
-  const goToSlide = useCallback((index: number) => {
-    if (index >= 0 && index < totalSlides) {
-      setCurrentSlide(index);
-    }
-  }, [totalSlides]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
