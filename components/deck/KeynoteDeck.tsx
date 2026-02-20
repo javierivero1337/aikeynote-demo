@@ -1,46 +1,49 @@
 "use client";
 
 import React from "react";
+import dynamic from "next/dynamic";
 import { DeckContainer } from "@/components/deck/DeckContainer";
-import type { DeckVariant } from "@/components/deck/types";
-import { Slide01_Hook } from "@/components/slides/Slide01_Hook";
-import { Slide02_Bio } from "@/components/slides/Slide02_Bio";
-import { Slide03_Feb2020 } from "@/components/slides/Slide03_Feb2020";
-import { Slide04_Sesgo } from "@/components/slides/Slide04_Sesgo";
-import { Slide05_Tesis } from "@/components/slides/Slide05_Tesis";
-import { Slide06_PuntoInflexion } from "@/components/slides/Slide06_PuntoInflexion";
-import { Slide07_FreeVsPaid } from "@/components/slides/Slide07_FreeVsPaid";
-import { Slide08_Tweets } from "@/components/slides/Slide08_Tweets";
-import { Slide09_Sentimiento } from "@/components/slides/Slide09_Sentimiento";
-import { Slide10_Urgency } from "@/components/slides/Slide10_Urgency";
-import { Slide11_Curve } from "@/components/slides/Slide11_Curve";
-import { Slide12_Secret } from "@/components/slides/Slide12_Secret";
-import { Slide13_Loop } from "@/components/slides/Slide13_Loop";
-import { Slide14_AlphaGo } from "@/components/slides/Slide14_AlphaGo";
-import { Slide15_Metr } from "@/components/slides/Slide15_Metr";
-import { Slide16_Coders } from "@/components/slides/Slide16_Coders";
-import { Slide17_Industries } from "@/components/slides/Slide17_Industries";
-import { Slide18_Lawyers } from "@/components/slides/Slide18_Lawyers";
-import { Slide19_LinkbertoIntro } from "@/components/slides/Slide19_LinkbertoIntro";
-import { Slide20_Hierarchy } from "@/components/slides/Slide20_Hierarchy";
-import { Slide21_LinkbertoDemo } from "@/components/slides/Slide21_LinkbertoDemo";
-import { Slide22_LinkbertoVsHuman } from "@/components/slides/Slide22_LinkbertoVsHuman";
-import { Slide23_HumanTouch } from "@/components/slides/Slide23_HumanTouch";
-import { Slide24_Warning } from "@/components/slides/Slide24_Warning";
-import { Slide25_PowerDynamic } from "@/components/slides/Slide25_PowerDynamic";
-import { Slide26_Lifeboat } from "@/components/slides/Slide26_Lifeboat";
-import { Slide27_Democratization } from "@/components/slides/Slide27_Democratization";
-import { Slide28_NaturalLanguage } from "@/components/slides/Slide28_NaturalLanguage";
-import { Slide29_Capabilities } from "@/components/slides/Slide29_Capabilities";
-import { Slide30_Iterators } from "@/components/slides/Slide30_Iterators";
-import { Slide31_Advice } from "@/components/slides/Slide31_Advice";
-import { Slide32_DailyHour } from "@/components/slides/Slide32_DailyHour";
-import { Slide33_FinancialResilience } from "@/components/slides/Slide33_FinancialResilience";
-import { Slide34_Closing } from "@/components/slides/Slide34_Closing";
+import type { DeckVariant, SlideProps } from "@/components/deck/types";
 
-const slides = [
+const Slide01_Hook = dynamic(() => import("@/components/slides/Slide01_Hook").then(m => m.Slide01_Hook), { ssr: false });
+const Slide02_Bio = dynamic(() => import("@/components/slides/Slide02_Bio").then(m => m.Slide02_Bio), { ssr: false });
+const Slide03_Agenda = dynamic(() => import("@/components/slides/Slide03_Agenda").then(m => m.Slide03_Agenda), { ssr: false });
+const Slide03_Feb2020 = dynamic(() => import("@/components/slides/Slide03_Feb2020").then(m => m.Slide03_Feb2020), { ssr: false });
+const Slide04_Sesgo = dynamic(() => import("@/components/slides/Slide04_Sesgo").then(m => m.Slide04_Sesgo), { ssr: false });
+const Slide05_Tesis = dynamic(() => import("@/components/slides/Slide05_Tesis").then(m => m.Slide05_Tesis), { ssr: false });
+const Slide06_PuntoInflexion = dynamic(() => import("@/components/slides/Slide06_PuntoInflexion").then(m => m.Slide06_PuntoInflexion), { ssr: false });
+const Slide07_FreeVsPaid = dynamic(() => import("@/components/slides/Slide07_FreeVsPaid").then(m => m.Slide07_FreeVsPaid), { ssr: false });
+const Slide08_Tweets = dynamic(() => import("@/components/slides/Slide08_Tweets").then(m => m.Slide08_Tweets), { ssr: false });
+const Slide09_Sentimiento = dynamic(() => import("@/components/slides/Slide09_Sentimiento").then(m => m.Slide09_Sentimiento), { ssr: false });
+const Slide10_Urgency = dynamic(() => import("@/components/slides/Slide10_Urgency").then(m => m.Slide10_Urgency), { ssr: false });
+const Slide11_Curve = dynamic(() => import("@/components/slides/Slide11_Curve").then(m => m.Slide11_Curve), { ssr: false });
+const Slide12_Secret = dynamic(() => import("@/components/slides/Slide12_Secret").then(m => m.Slide12_Secret), { ssr: false });
+const Slide13_Loop = dynamic(() => import("@/components/slides/Slide13_Loop").then(m => m.Slide13_Loop), { ssr: false });
+const Slide14_AlphaGo = dynamic(() => import("@/components/slides/Slide14_AlphaGo").then(m => m.Slide14_AlphaGo), { ssr: false });
+const Slide15_Metr = dynamic(() => import("@/components/slides/Slide15_Metr").then(m => m.Slide15_Metr), { ssr: false });
+const Slide16_Coders = dynamic(() => import("@/components/slides/Slide16_Coders").then(m => m.Slide16_Coders), { ssr: false });
+const Slide17_Industries = dynamic(() => import("@/components/slides/Slide17_Industries").then(m => m.Slide17_Industries), { ssr: false });
+const Slide18_Lawyers = dynamic(() => import("@/components/slides/Slide18_Lawyers").then(m => m.Slide18_Lawyers), { ssr: false });
+const Slide19_LinkbertoIntro = dynamic(() => import("@/components/slides/Slide19_LinkbertoIntro").then(m => m.Slide19_LinkbertoIntro), { ssr: false });
+const Slide20_Hierarchy = dynamic(() => import("@/components/slides/Slide20_Hierarchy").then(m => m.Slide20_Hierarchy), { ssr: false });
+const Slide21_LinkbertoDemo = dynamic(() => import("@/components/slides/Slide21_LinkbertoDemo").then(m => m.Slide21_LinkbertoDemo), { ssr: false });
+const Slide22_LinkbertoVsHuman = dynamic(() => import("@/components/slides/Slide22_LinkbertoVsHuman").then(m => m.Slide22_LinkbertoVsHuman), { ssr: false });
+const Slide23_HumanTouch = dynamic(() => import("@/components/slides/Slide23_HumanTouch").then(m => m.Slide23_HumanTouch), { ssr: false });
+const Slide25_PowerDynamic = dynamic(() => import("@/components/slides/Slide25_PowerDynamic").then(m => m.Slide25_PowerDynamic), { ssr: false });
+const Slide26_Lifeboat = dynamic(() => import("@/components/slides/Slide26_Lifeboat").then(m => m.Slide26_Lifeboat), { ssr: false });
+const Slide27_Democratization = dynamic(() => import("@/components/slides/Slide27_Democratization").then(m => m.Slide27_Democratization), { ssr: false });
+const Slide28_NaturalLanguage = dynamic(() => import("@/components/slides/Slide28_NaturalLanguage").then(m => m.Slide28_NaturalLanguage), { ssr: false });
+const Slide29_Capabilities = dynamic(() => import("@/components/slides/Slide29_Capabilities").then(m => m.Slide29_Capabilities), { ssr: false });
+const Slide30_Iterators = dynamic(() => import("@/components/slides/Slide30_Iterators").then(m => m.Slide30_Iterators), { ssr: false });
+const Slide31_Advice = dynamic(() => import("@/components/slides/Slide31_Advice").then(m => m.Slide31_Advice), { ssr: false });
+const Slide32_DailyHour = dynamic(() => import("@/components/slides/Slide32_DailyHour").then(m => m.Slide32_DailyHour), { ssr: false });
+const Slide33_FinancialResilience = dynamic(() => import("@/components/slides/Slide33_FinancialResilience").then(m => m.Slide33_FinancialResilience), { ssr: false });
+const Slide34_Closing = dynamic(() => import("@/components/slides/Slide34_Closing").then(m => m.Slide34_Closing), { ssr: false });
+
+const slides: React.ComponentType<SlideProps>[] = [
   Slide01_Hook,
   Slide02_Bio,
+  Slide03_Agenda,
   Slide03_Feb2020,
   Slide04_Sesgo,
   Slide05_Tesis,
@@ -61,9 +64,8 @@ const slides = [
   Slide20_Hierarchy,
   Slide21_LinkbertoDemo,
   Slide22_LinkbertoVsHuman,
-  Slide23_HumanTouch,
-  Slide24_Warning,
   Slide25_PowerDynamic,
+  Slide23_HumanTouch,
   Slide26_Lifeboat,
   Slide27_Democratization,
   Slide28_NaturalLanguage,

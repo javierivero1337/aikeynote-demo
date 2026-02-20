@@ -308,6 +308,7 @@ export function Slide28_NaturalLanguage() {
                         loop
                         muted
                         playsInline
+                        preload="metadata"
                         className="w-full h-full object-cover rounded-t-[1.5rem]"
                       />
                     </motion.div>

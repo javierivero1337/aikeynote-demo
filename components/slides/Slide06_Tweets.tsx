@@ -3,6 +3,8 @@
 import React, { useState, useCallback } from "react";
 import { SlideShell } from "../deck/SlideShell";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import slide6Background from "@/public/slides-imagery/slide6.png";
 
 interface Tweet {
   name: string;
@@ -294,10 +296,12 @@ export function Slide06_Tweets() {
     <SlideShell className="relative overflow-hidden !p-4 md:!p-8 lg:!p-12">
       {/* Background Image */}
       <div className="absolute inset-0 z-0 opacity-15 pointer-events-none">
-        <img 
-          src="/slides-imagery/slide6.png" 
-          alt="Tweets background" 
-          className="w-full h-full object-cover grayscale"
+        <Image
+          src={slide6Background}
+          alt="Tweets background"
+          fill
+          sizes="100vw"
+          className="object-cover grayscale"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/80" />
       </div>

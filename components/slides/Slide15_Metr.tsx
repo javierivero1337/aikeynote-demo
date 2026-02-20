@@ -3,6 +3,8 @@ import { SlideShell } from "../deck/SlideShell";
 import { SlideHeading } from "../deck/SlideHeading";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, X } from "lucide-react";
+import Image from "next/image";
+import slide12Background from "@/public/slides-imagery/slide12.png";
 
 export function Slide15_Metr() {
   const [showTweet, setShowTweet] = useState(false);
@@ -24,10 +26,12 @@ export function Slide15_Metr() {
     <SlideShell className="relative">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <img 
-          src="/slides-imagery/slide12.png" 
-          alt="Background" 
-          className="w-full h-full object-cover opacity-20"
+        <Image
+          src={slide12Background}
+          alt="Background"
+          fill
+          sizes="100vw"
+          className="object-cover opacity-20"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/90 to-black/60" />
       </div>

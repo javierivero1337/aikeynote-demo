@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { RadarScan } from "../deck/Backgrounds";
 import GlitchText from "../GlitchText";
 import { Newspaper, X } from "lucide-react";
+import Image from "next/image";
 
 export function Slide17_Industries() {
   const [isOpen, setIsOpen] = useState(false);
@@ -104,10 +105,12 @@ export function Slide17_Industries() {
               className="relative max-w-2xl w-full bg-zinc-950 border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl"
             >
               <div className="relative h-72 w-full">
-                <img 
-                  src="/davos.webp" 
-                  alt="Dario Amodei at Davos" 
-                  className="w-full h-full object-cover object-top"
+                <Image
+                  src="/davos.webp"
+                  alt="Dario Amodei at Davos"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 768px"
+                  className="object-cover object-top"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
                 <button 

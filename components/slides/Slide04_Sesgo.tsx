@@ -4,6 +4,8 @@ import { SlideHeading } from "../deck/SlideHeading";
 import { motion } from "framer-motion";
 import { GridDistortion } from "../deck/Backgrounds";
 import GlitchText from "../GlitchText";
+import Image from "next/image";
+import slide4Background from "@/public/slides-imagery/slide4.png";
 
 export function Slide04_Sesgo() {
   const dismissivePhrases = [
@@ -18,10 +20,12 @@ export function Slide04_Sesgo() {
     <SlideShell className="relative">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <img 
-          src="/slides-imagery/slide4.png" 
-          alt="Background" 
-          className="w-full h-full object-cover opacity-80"
+        <Image
+          src={slide4Background}
+          alt="Background"
+          fill
+          sizes="100vw"
+          className="object-cover opacity-80"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-transparent" />
       </div>

@@ -61,11 +61,15 @@ export function SimpleGlobe() {
       return dot;
     });
 
+    let isRunning = false;
+    let isVisible = true;
+
     const resize = () => {
-      const dpr = window.devicePixelRatio || 1;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const rect = canvas.getBoundingClientRect();
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(dpr, dpr);
     };
 
@@ -73,6 +77,7 @@ export function SimpleGlobe() {
     window.addEventListener("resize", resize);
 
     const draw = () => {
+      if (!isRunning || !isVisible || document.hidden) return;
       const rect = canvas.getBoundingClientRect();
       const w = rect.width;
       const h = rect.height;
@@ -191,10 +196,38 @@ export function SimpleGlobe() {
       animRef.current = requestAnimationFrame(draw);
     };
 
-    animRef.current = requestAnimationFrame(draw);
+    const start = () => {
+      if (isRunning || !isVisible || document.hidden) return;
+      isRunning = true;
+      animRef.current = requestAnimationFrame(draw);
+    };
+
+    const stop = () => {
+      isRunning = false;
+      cancelAnimationFrame(animRef.current);
+    };
+
+    const handleVisibility = () => {
+      if (document.hidden) stop();
+      else start();
+    };
+
+    const observer = new IntersectionObserver(
+      entries => {
+        isVisible = entries[0]?.isIntersecting ?? true;
+        if (isVisible) start();
+        else stop();
+      },
+      { threshold: 0.01 }
+    );
+    observer.observe(canvas);
+    document.addEventListener("visibilitychange", handleVisibility);
+    start();
 
     return () => {
-      cancelAnimationFrame(animRef.current);
+      stop();
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibility);
       window.removeEventListener("resize", resize);
     };
   }, [project]);

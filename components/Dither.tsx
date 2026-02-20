@@ -268,9 +268,11 @@ function DitheredWaves({
         />
       </mesh>
 
-      <EffectComposer>
-        <RetroEffect colorNum={colorNum} pixelSize={pixelSize} />
-      </EffectComposer>
+      {!disableAnimation && (
+        <EffectComposer>
+          <RetroEffect colorNum={colorNum} pixelSize={pixelSize} />
+        </EffectComposer>
+      )}
 
       <mesh
         onPointerMove={handlePointerMove}
@@ -313,7 +315,7 @@ export default function Dither({
       className="w-full h-full relative"
       camera={{ position: [0, 0, 6] }}
       dpr={1}
-      gl={{ antialias: true, preserveDrawingBuffer: true }}
+      gl={{ antialias: true, preserveDrawingBuffer: false }}
     >
       <DitheredWaves
         waveSpeed={waveSpeed}

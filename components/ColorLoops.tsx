@@ -46,6 +46,8 @@ const ColorLoops: React.FC<ColorLoopsProps> = ({
     const height = container.clientHeight;
 
     const scene = new THREE.Scene();
+    let isRunning = false;
+    let isVisible = true;
 
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
 
@@ -135,13 +137,26 @@ const ColorLoops: React.FC<ColorLoopsProps> = ({
 
     const clock = new THREE.Clock();
     const animate = () => {
+      if (!isRunning || !isVisible || document.hidden) return;
       const elapsedTime = clock.getElapsedTime();
       material.uniforms.uTime.value = elapsedTime;
 
       renderer.render(scene, camera);
       animationFrameRef.current = requestAnimationFrame(animate);
     };
-    animate();
+    const start = () => {
+      if (isRunning || !isVisible || document.hidden) return;
+      isRunning = true;
+      animate();
+    };
+
+    const stop = () => {
+      isRunning = false;
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+        animationFrameRef.current = null;
+      }
+    };
 
     const handleResize = () => {
       const newWidth = container.clientWidth;
@@ -153,11 +168,26 @@ const ColorLoops: React.FC<ColorLoopsProps> = ({
 
     const resizeObserver = new ResizeObserver(handleResize);
     resizeObserver.observe(container);
+    const observer = new IntersectionObserver(
+      entries => {
+        isVisible = entries[0]?.isIntersecting ?? true;
+        if (isVisible) start();
+        else stop();
+      },
+      { threshold: 0.01 }
+    );
+    observer.observe(container);
+    const handleVisibility = () => {
+      if (document.hidden) stop();
+      else start();
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
+    start();
 
     return () => {
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
+      stop();
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibility);
       resizeObserver.disconnect();
 
       renderer.dispose();

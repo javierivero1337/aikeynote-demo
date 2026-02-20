@@ -63,7 +63,7 @@ export default function LiquidEther({
   iterationsPoisson = 32,
   dt = 0.014,
   BFECC = true,
-  resolution = 0.5,
+  resolution = 0.4,
   isBounce = false,
   colors = defaultColors,
   style = {},
@@ -583,6 +583,22 @@ export default function LiquidEther({
         Common.renderer.render(this.scene, this.camera);
         Common.renderer.setRenderTarget(null);
       }
+      dispose() {
+        if (this.scene) {
+          this.scene.traverse(obj => {
+            const mesh = obj as THREE.Mesh;
+            if (mesh.geometry) mesh.geometry.dispose();
+            const material = (mesh as any).material;
+            if (Array.isArray(material)) {
+              material.forEach(m => m?.dispose?.());
+            } else {
+              material?.dispose?.();
+            }
+          });
+        }
+        this.geometry?.dispose();
+        this.material?.dispose();
+      }
     }
 
     class Advection extends ShaderPass {
@@ -861,8 +877,12 @@ export default function LiquidEther({
         this.createShaderPass();
       }
       getFloatType() {
-        const isIOS = /(iPad|iPhone|iPod)/i.test(navigator.userAgent);
-        return isIOS ? THREE.HalfFloatType : THREE.FloatType;
+        const renderer = Common.renderer;
+        const gl = renderer?.getContext();
+        const webgl2Supported =
+          typeof WebGL2RenderingContext !== 'undefined' && gl instanceof WebGL2RenderingContext;
+        const halfFloatSupported = !!(webgl2Supported || gl?.getExtension('OES_texture_half_float'));
+        return halfFloatSupported ? THREE.HalfFloatType : THREE.FloatType;
       }
       createAllFBO() {
         const type = this.getFloatType();
@@ -957,6 +977,18 @@ export default function LiquidEther({
         const pressure = this.poisson.update({ iterations: this.options.iterations_poisson });
         this.pressure.update({ vel, pressure });
       }
+      dispose() {
+        this.advection?.dispose?.();
+        this.externalForce?.dispose?.();
+        this.viscous?.dispose?.();
+        this.divergence?.dispose?.();
+        this.poisson?.dispose?.();
+        this.pressure?.dispose?.();
+        for (const key in this.fbos) {
+          this.fbos[key]?.dispose();
+          this.fbos[key] = null;
+        }
+      }
     }
 
     class Output {
@@ -996,6 +1028,12 @@ export default function LiquidEther({
       update() {
         this.simulation.update();
         this.render();
+      }
+      dispose() {
+        this.simulation.dispose();
+        this.output.geometry.dispose();
+        const material = this.output.material as THREE.Material;
+        material.dispose();
       }
     }
 
@@ -1073,9 +1111,12 @@ export default function LiquidEther({
           window.removeEventListener('resize', this._resize);
           if (this._onVisibility) document.removeEventListener('visibilitychange', this._onVisibility);
           Mouse.dispose();
+          this.output?.dispose?.();
+          paletteTex.dispose();
           if (Common.renderer) {
             const canvas = Common.renderer.domElement;
             if (canvas && canvas.parentNode) canvas.parentNode.removeChild(canvas);
+            Common.renderer.forceContextLoss();
             Common.renderer.dispose();
           }
         } catch {

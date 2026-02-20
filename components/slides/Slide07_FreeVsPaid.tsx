@@ -3,6 +3,8 @@ import { SlideShell } from "../deck/SlideShell";
 import { SlideHeading } from "../deck/SlideHeading";
 import { motion } from "framer-motion";
 import ShinyText from "../ShinyText";
+import Image from "next/image";
+import slide13Background from "@/public/slides-imagery/slide13.png";
 
 export function Slide07_FreeVsPaid() {
   const sliderRef = useRef<HTMLDivElement>(null);
@@ -67,10 +69,12 @@ export function Slide07_FreeVsPaid() {
               style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
             >
               <div className="absolute inset-0">
-                <img
-                  src="/slides-imagery/slide13.png"
+                <Image
+                  src={slide13Background}
                   alt="Frontier model state"
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="100vw"
+                  className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-900/30 via-black/20 to-black/80" />
               </div>

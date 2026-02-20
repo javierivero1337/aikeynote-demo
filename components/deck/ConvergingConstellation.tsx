@@ -62,11 +62,15 @@ export function ConvergingConstellation() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    let isRunning = false;
+    let isVisible = true;
+
     const resize = () => {
-      const dpr = window.devicePixelRatio || 1;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const rect = canvas.getBoundingClientRect();
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(dpr, dpr);
     };
 
@@ -82,7 +86,7 @@ export function ConvergingConstellation() {
     let frame = 0;
 
     const draw = () => {
-      if (stoppedRef.current) return;
+      if (!isRunning || !isVisible || document.hidden || stoppedRef.current) return;
 
       const r = canvas.getBoundingClientRect();
       const w = r.width;
@@ -195,10 +199,38 @@ export function ConvergingConstellation() {
       animRef.current = requestAnimationFrame(draw);
     };
 
-    animRef.current = requestAnimationFrame(draw);
+    const start = () => {
+      if (isRunning || !isVisible || document.hidden || stoppedRef.current) return;
+      isRunning = true;
+      animRef.current = requestAnimationFrame(draw);
+    };
+
+    const stop = () => {
+      isRunning = false;
+      cancelAnimationFrame(animRef.current);
+    };
+
+    const handleVisibility = () => {
+      if (document.hidden) stop();
+      else start();
+    };
+
+    const observer = new IntersectionObserver(
+      entries => {
+        isVisible = entries[0]?.isIntersecting ?? true;
+        if (isVisible) start();
+        else stop();
+      },
+      { threshold: 0.01 }
+    );
+    observer.observe(canvas);
+    document.addEventListener("visibilitychange", handleVisibility);
+    start();
 
     return () => {
-      cancelAnimationFrame(animRef.current);
+      stop();
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibility);
       window.removeEventListener("resize", resize);
     };
   }, [createParticle]);

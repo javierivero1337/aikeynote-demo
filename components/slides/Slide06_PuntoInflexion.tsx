@@ -3,16 +3,20 @@ import { SlideShell } from "../deck/SlideShell";
 import { SlideHeading } from "../deck/SlideHeading";
 import { motion } from "framer-motion";
 import { ConvergingConstellation } from "../deck/ConvergingConstellation";
+import Image from "next/image";
+import slide6Background from "@/public/slides-imagery/slide6.png";
 
 export function Slide06_PuntoInflexion() {
   return (
     <SlideShell className="relative overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <img 
-          src="/slides-imagery/slide6.png" 
-          alt="Background" 
-          className="w-full h-full object-cover opacity-60"
+        <Image
+          src={slide6Background}
+          alt="Background"
+          fill
+          sizes="100vw"
+          className="object-cover opacity-60"
         />
         <div className="absolute inset-0 bg-black/40" />
       </div>

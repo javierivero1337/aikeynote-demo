@@ -58,22 +58,23 @@ export function Slide34_Closing({ variant = "default" }: Slide34ClosingProps) {
           <p className="text-zinc-400 font-bold tracking-[0.5em] uppercase text-[12px]">
             Javier Rivero
           </p>
+
+          {/* QR Code */}
+          <div className="mt-10 flex flex-col items-center gap-3">
+            <Image
+              src="/qrsurvey.jpeg"
+              alt="QR Survey"
+              width={240}
+              height={240}
+              className="rounded-lg opacity-90"
+            />
+            <p className="text-zinc-400 text-[11px] tracking-widest uppercase font-light">
+              Tu feedback es importante
+            </p>
+          </div>
         </motion.div>
       </div>
 
-      {/* Mini Footer */}
-      {showBranding && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 3, duration: 1 }}
-          className="absolute bottom-8 left-0 right-0 z-20 flex justify-center pointer-events-none"
-        >
-          <p className="text-zinc-600 font-mono text-[10px] uppercase tracking-widest">
-            Collective Academy 2026
-          </p>
-        </motion.div>
-      )}
     </SlideShell>
   );
 }

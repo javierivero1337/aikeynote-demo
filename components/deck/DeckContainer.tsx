@@ -16,8 +16,8 @@ export function DeckContainer({ slides, variant = "default" }: DeckContainerProp
   const totalSlides = slides.length;
 
   const nextSlide = useCallback(() => {
-    setCurrentSlide((prev) => Math.min(prev + 1, totalSlides - 1));
-  }, [totalSlides]);
+    setCurrentSlide(prev => Math.min(prev + 1, slides.length - 1));
+  }, [slides.length]);
 
   const prevSlide = useCallback(() => {
     setCurrentSlide((prev) => Math.max(prev - 1, 0));

@@ -23,6 +23,7 @@ export function Slide01b_Bio() {
               fill
               className="object-cover"
               priority
+              sizes="(max-width: 768px) 256px, 320px"
             />
           </div>
           <div className="text-center md:text-left">
