@@ -5,13 +5,9 @@ import { motion } from "framer-motion";
 import Dither from "../Dither";
 import BlurText from "../BlurText";
 import Image from "next/image";
-import type { DeckVariant } from "../deck/types";
+import type { SlideProps } from "../deck/types";
 
-interface Slide01HookProps {
-  variant?: DeckVariant;
-}
-
-export function Slide01_Hook({ variant = "default" }: Slide01HookProps) {
+export function Slide01_Hook({ variant = "default" }: SlideProps) {
   const showBranding = variant !== "client1";
 
   return (

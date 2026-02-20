@@ -4,14 +4,10 @@ import { SlideHeading } from "../deck/SlideHeading";
 import { motion } from "framer-motion";
 import LiquidEther from "../LiquidEther";
 import GlitchText from "../GlitchText";
-import type { DeckVariant } from "../deck/types";
+import type { SlideProps } from "../deck/types";
 import Image from "next/image";
 
-interface Slide34ClosingProps {
-  variant?: DeckVariant;
-}
-
-export function Slide34_Closing({ variant = "default" }: Slide34ClosingProps) {
+export function Slide34_Closing({ variant = "default" }: SlideProps) {
   const showBranding = variant !== "client1";
 
   return (
